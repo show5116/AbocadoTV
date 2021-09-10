@@ -1,0 +1,46 @@
+@import url(../css/reset.css);
+@import url(../css/common.css);
+.body__container{
+
+}
+.category-wrap{
+    margin: 21px 0 30px;
+    padding: 8px;
+    border-radius: 1px;
+    background: #E7EDF3;
+    position: relative;
+}
+.bundle-group img{
+    cursor: move;
+}
+.category-wrap .buttons{
+    margin-left : auto;
+}
+.main-category, .sub-category, .add-category{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 5px;
+    padding: 0 19px;
+    height: 52px;
+    border: 1px solid #E0E5EE;
+    font-size: 16px;
+    background: #fff;
+    box-sizing: border-box;
+}
+.main-category:hover, .sub-category:hover{
+    border: 1px solid #000000;
+}
+.sub-category{
+    margin-left: 80px;
+}
+.add-category{
+    opacity: .5;
+    cursor: pointer;
+}
+.add-category:hover{
+    opacity: 1;
+}
+.buttons button{
+    cursor: pointer;
+}
