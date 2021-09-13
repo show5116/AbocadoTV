@@ -17,13 +17,17 @@ subCategory.forEach(category =>{
 
 addBtn.addEventListener("click",function(){
     createCategory();
-})
-
-$(".sort").sortable({
-    cursor: "move",
-    handle: "img"
 });
-$(".sort").disableSelection();
+
+function btnview(category){
+    const buttons = category.querySelector(".buttons");
+    category.addEventListener("mouseover",function(){
+        buttons.classList.remove(CLASSNAME_HIDDEN);
+    });
+    category.addEventListener("mouseout",function(){
+        buttons.classList.add(CLASSNAME_HIDDEN);
+    });
+}
 
 function createCategory(){
     const li = document.createElement("li");
@@ -41,44 +45,24 @@ function createCategory(){
     const confirmBtn = li.querySelector(".confirmBtn");
     const text = li.querySelector("input");
     
+    text.focus();
     text.addEventListener("keyup",function(){
         if(text.value===""){
             confirmBtn.disabled="true";
         }else{
             confirmBtn.removeAttribute("disabled");
+            if(window.event.keyCode==13){
+                makeMain(li,text);
+            }
         }
     });
     cancelBtn.addEventListener("click",function(){
         li.remove();
     });
     confirmBtn.addEventListener("click",function(){
-        li.innerHTML = 
-        `<div class="category main-category">
-            <img class="list-img" src="../img/list.jpg">
-            <img class="drag-img" src="../img/drag.jpg">
-            <span>${text.value}</span>
-            <div class="buttons hidden">
-                <button class="addBtn" type="button">추가</button>
-                <button class="updateBtn" type="button">수정</button>
-                <button class="removeBtn" type="button">삭제</button>
-            </div>
-        </div>
-        <ul class="sort">
-        </ul>`;
-        const category = li.querySelector(".category");
-        btnview(category);
-        mainBtn(category);
+        makeMain(li,text);
     });
-}
-    
-function btnview(category){
-    const buttons = category.querySelector(".buttons");
-    category.addEventListener("mouseover",function(){
-        buttons.classList.remove(CLASSNAME_HIDDEN);
-    });
-    category.addEventListener("mouseout",function(){
-        buttons.classList.add(CLASSNAME_HIDDEN);
-    });
+    sort();
 }
 
 function mainBtn(category){
@@ -104,30 +88,27 @@ function mainBtn(category){
         <div class="buttons">
             <button class="cancelBtn" type="button">취소</button>
             <button class="confirmBtn" type="button" disabled ="true">확인</button>
-        </div>
-        `;
+        </div>`;
         ul.append(li);
+        const cancelBtn = li.querySelector(".cancelBtn");
+        const confirmBtn = li.querySelector(".confirmBtn");
+        const text = li.querySelector("input");
+        text.focus();
         text.addEventListener("keyup",function(){
             if(text.value===""){
                 confirmBtn.disabled="true";
             }else{
                 confirmBtn.removeAttribute("disabled");
+                if(window.event.keyCode==13){
+                    makeSub(li,text);
+                }
             }
         });
         cancelBtn.addEventListener("click",function(){
             li.remove();
         });
         confirmBtn.addEventListener("click",function(){
-            li.innerHTML = `
-            <img class="drag-img" src="../img/drag.jpg">
-            <span>${text.value}</span>
-            <div class="buttons hidden">
-                <button class="updateBtn" type="button">수정</button>
-                <button class="removeBtn" type="button">삭제</button>
-            </div>`;
-            const category = li.querySelector(".category");
-            btnview(category);
-            subBtn(category);
+            makeSub(li);
         });
     });
     removeBtn.addEventListener("click",function(event){
@@ -135,9 +116,55 @@ function mainBtn(category){
     });
 }
 
+sort();
+function sort(){
+    $(".sort").sortable({
+        cursor: "move",
+        handle: ".drag-img"
+    });
+    $(".sort").disableSelection();
+}
+
+function makeMain(li,text){
+    li.innerHTML = 
+    `<div class="category main-category">
+        <img class="list-img" src="../img/list.jpg">
+        <img class="drag-img" src="../img/drag.jpg">
+        <span>${text.value}</span>
+        <div class="buttons hidden">
+            <button class="addBtn" type="button">추가</button>
+            <button class="updateBtn" type="button">수정</button>
+            <button class="removeBtn" type="button">삭제</button>
+        </div>
+    </div>
+    <ul class="sort">
+    </ul>`;
+    const category = li.querySelector(".category");
+    btnview(category);
+    mainBtn(category);
+}
+
+function makeSub(li,text){
+    li.innerHTML = `
+    <img class="drag-img" src="../img/drag.jpg">
+    <span>${text.value}</span>
+    <div class="buttons hidden">
+        <button class="updateBtn" type="button">수정</button>
+        <button class="removeBtn" type="button">삭제</button>
+    </div>`;
+    const category = li.querySelector(".category");
+    btnview(li);
+    subBtn(li);
+    sort();
+}
+
 function subBtn(category){
     const updateBtn = category.querySelector(".updateBtn");
     const removeBtn = category.querySelector(".removeBtn");
 
+    removeBtn.addEventListener("click",function(){
+        category.remove();
+    });
     //updateBtn.addEventListener("",);
 }
+

@@ -34,6 +34,7 @@ public class SignUpController extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		if(cmd.equals("checkmember")) {
+			
 			if(memberserivce.CheckMember(mail)) out.print(swOK);
 			else out.print(swNO);
 			return;
@@ -52,7 +53,7 @@ public class SignUpController extends HttpServlet {
 			else out.print(swNO);
 			return;
 		}else {
-			out.print(swNO);
+			out.print(swNO);			
 			return;
 		}
 	}

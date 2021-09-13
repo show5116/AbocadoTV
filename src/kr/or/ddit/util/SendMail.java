@@ -22,11 +22,11 @@ public class SendMail {
 	private Map<String,String> map;
 	
 	static final String FROM = "yyj161091@gmail.com";
-    static final String FROMNAME = "Avocado 서비스";
+    static final String FROMNAME = "Abocado 서비스";
     static final String SMTP_USERNAME = "yyj161091@gmail.com";
     static final String SMTP_PASSWORD = "Yyj14161091!";
     static final String HOST = "smtp.gmail.com";
-    static final int PORT = 587;
+    static final int PORT = 465;
     
     private SendMail() {
     	rand = new Random();
@@ -44,11 +44,11 @@ public class SendMail {
     	);
     	map.put(mail,certification);
     	Properties props = System.getProperties();
-    	props.put("mail.smtp.host", "smtp.naver.com");
+    	props.put("mail.smtp.host", "smtp.gmail.com");
     	props.put("mail.smtp.port", PORT); 
     	props.put("mail.smtp.auth", "true");
     	props.put("mail.smtp.ssl.enable", "true");
-    	props.put("mail.smtp.ssl.trust", "smtp.naver.com");
+    	props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
     	Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
              protected PasswordAuthentication getPasswordAuthentication() {
                  return new PasswordAuthentication(SMTP_USERNAME, SMTP_PASSWORD);

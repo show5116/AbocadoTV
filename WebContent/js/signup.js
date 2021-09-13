@@ -226,6 +226,7 @@ nextBtn.addEventListener("click",function() {
         nicknameText.focus();
         return;
     }
+	nextBtn.disabled="true";
 	$.ajax({
 		type:'POST',
 		url:'/signUp',
@@ -257,6 +258,7 @@ nextBtn.addEventListener("click",function() {
 			}
 		},
 		error: function(request,status,error){
+			nextBtn.removeAttribute("disabled");
             alert('code:'+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         }
 	});
@@ -267,6 +269,7 @@ submitBtn.addEventListener("click",function(){
     if(certification.value.length!==6){
         certification.focus();
     }else{
+		submitBtn.disabled="true";
 		$.ajax({
 			type:'POST',
 			url:'/signUp',
@@ -285,6 +288,7 @@ submitBtn.addEventListener("click",function(){
                 alert("회원가입이 완료되었습니다.");
 			},
 			error: function(request,status,error){
+				submitBtn.removeAttribute("disabled");
 	            alert('code:'+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	        }
 		});
