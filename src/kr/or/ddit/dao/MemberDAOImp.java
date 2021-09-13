@@ -1,5 +1,7 @@
 package kr.or.ddit.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -45,6 +47,48 @@ public class MemberDAOImp implements IMemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return false;
+	}
+
+	@Override
+	public boolean PasswordCheck(String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<MemberVO> SelectListMember() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MemberVO> SelectListMember(String mail) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MemberVO> SelectListMember(String condition, String mail) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int MemberCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public MemberVO SelectMember(String mail) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean UpdateMember(MemberVO vo) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }

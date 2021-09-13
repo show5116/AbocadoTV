@@ -10,7 +10,18 @@
     background: #E7EDF3;
     position: relative;
 }
-.bundle-group img{
+.list-img{
+    cursor: pointer;    
+    transition: all .3s ease-in;
+}
+.rotateimg90{
+    -webkit-transform:rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+.drag-img{
     cursor: move;
 }
 .category-wrap .buttons{

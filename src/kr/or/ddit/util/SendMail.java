@@ -21,12 +21,12 @@ public class SendMail {
 	private Random rand;
 	private Map<String,String> map;
 	
-	static final String FROM = "show5116@naver.com";
-    static final String FROMNAME = "Outerpark 서비스";
-    static final String SMTP_USERNAME = "show5116@naver.com";
+	static final String FROM = "yyj161091@gmail.com";
+    static final String FROMNAME = "Avocado 서비스";
+    static final String SMTP_USERNAME = "yyj161091@gmail.com";
     static final String SMTP_PASSWORD = "Yyj14161091!";
-    static final String HOST = "smtp.naver.com";
-    static final int PORT = 465;
+    static final String HOST = "smtp.gmail.com";
+    static final int PORT = 587;
     
     private SendMail() {
     	rand = new Random();
