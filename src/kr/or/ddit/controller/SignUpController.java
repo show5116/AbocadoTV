@@ -1,8 +1,8 @@
 package kr.or.ddit.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,10 +15,7 @@ import kr.or.ddit.vo.MemberVO;
 @WebServlet("/signUp")
 public class SignUpController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String swOK = "{ \"sw\" : \"ok\"  }";
-	private static final String swNO = "{ \"sw\" : \"no\"  }";
 	private MemberServiceImp memberserivce;
-	
 	
 	public SignUpController() {
 		memberserivce = MemberServiceImp.getInstance();
@@ -32,16 +29,11 @@ public class SignUpController extends HttpServlet {
 		String mail = request.getParameter("mail");
 		String cmd = request.getParameter("cmd");
 		
-		PrintWriter out = response.getWriter();
+		String result = "";
 		if(cmd.equals("checkmember")) {
-			
-			if(memberserivce.CheckMember(mail)) out.print(swOK);
-			else out.print(swNO);
-			return;
+			result = memberserivce.CheckMember(mail);
 		}else if(cmd.equals("resend")) {
-			if(memberserivce.Resend(mail)) out.print(swOK);
-			else out.print(swNO);
-			return;
+			result = memberserivce.Resend(mail);
 		}else if(cmd.equals("signUp")){
 			String certification = request.getParameter("certification");
 			MemberVO vo = new MemberVO();
@@ -49,13 +41,15 @@ public class SignUpController extends HttpServlet {
 			vo.setFirstname(request.getParameter("firstname"));
 			vo.setLastname(request.getParameter("lastname"));
 			vo.setPassword(request.getParameter("password"));
-			if(memberserivce.InsertMember(vo,certification)) out.print(swOK);
-			else out.print(swNO);
-			return;
-		}else {
-			out.print(swNO);			
+			vo.setRegedent_num(request.getParameter("regidentNumber"));
+			vo.setNickname(request.getParameter("nickname"));
+			result = memberserivce.InsertMember(vo,certification);
+		}else {			
 			return;
 		}
+		request.setAttribute("json", result);
+		RequestDispatcher rd = request.getRequestDispatcher("/page/pro/signup-pro.jsp");
+		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

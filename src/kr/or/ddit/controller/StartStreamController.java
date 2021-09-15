@@ -10,31 +10,28 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class StartStreamController
  */
-@WebServlet("/StartStreamController")
+@WebServlet("/startStreaming.do")
 public class StartStreamController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public StartStreamController() {
-        super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		
+		String mail = "show5116@naver.com";
+		String title = request.getParameter("stream-title");
+		String category = request.getParameter("stream-category");
+		String content = request.getParameter("stream-category");
+		
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

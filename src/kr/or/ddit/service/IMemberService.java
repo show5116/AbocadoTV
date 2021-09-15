@@ -3,9 +3,9 @@ package kr.or.ddit.service;
 import kr.or.ddit.vo.MemberVO;
 
 public interface IMemberService {
-	public boolean CheckMember(String mail);
+	public String CheckMember(String mail);
 	
-	public boolean Resend(String mail);
+	public String Resend(String mail);
 	
-	public boolean InsertMember(MemberVO vo,String certification);
+	public String InsertMember(MemberVO vo,String certification);
 }

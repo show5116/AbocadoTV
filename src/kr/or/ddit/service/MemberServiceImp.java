@@ -1,6 +1,8 @@
 package kr.or.ddit.service;
 
 import kr.or.ddit.dao.MemberDAOImp;
+import kr.or.ddit.util.GsonUtil;
+import kr.or.ddit.util.SHA256Util;
 import kr.or.ddit.util.SendMail;
 import kr.or.ddit.vo.MemberVO;
 
@@ -13,41 +15,46 @@ public class MemberServiceImp implements IMemberService{
 	
 	private MemberDAOImp memberdao;
 	private SendMail sendmail;
+	private GsonUtil gsonUtil;
+	private SHA256Util sha256Util;
 	
 	private MemberServiceImp() {
 		memberdao = MemberDAOImp.getInstance();
 		sendmail = SendMail.getInstance();
+		gsonUtil = GsonUtil.getInstance();
+		sha256Util = SHA256Util.getInstance();
 	}
 	
 	@Override
-	public boolean CheckMember(String mail) {
+	public String CheckMember(String mail) {
 		if(memberdao.CheckMember(mail)) {
 			try {
 				sendmail.SendCertification(mail);
-				return true;
+				return gsonUtil.SwOK();
 			} catch (Exception e) {
 			}
 		}
-		return false;
+		return gsonUtil.SwNO();
 	}
 	
 	@Override
-	public boolean Resend(String mail) {
+	public String Resend(String mail) {
 		try {
 			sendmail.SendCertification(mail);
-			return true;			
+			return gsonUtil.SwOK();			
 		} catch (Exception e) {
-			return false;
+			return gsonUtil.SwNO();
 		}
 	}
 
 	@Override
-	public boolean InsertMember(MemberVO vo,String certification) {
+	public String InsertMember(MemberVO vo,String certification) {
+		vo.setPassword(sha256Util.encrypt(vo.getPassword()));
 		if(certification.equals(sendmail.getFromMap(vo.getMember_mail()))) {
 			if(memberdao.InsertMember(vo)) {
-				return true;
+				return gsonUtil.SwOK();
 			}
 		}
-		return false;
+		return gsonUtil.SwNO();
 	}
 }

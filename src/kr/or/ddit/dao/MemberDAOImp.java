@@ -27,7 +27,6 @@ public class MemberDAOImp implements IMemberDAO {
 		try {
 			sqlSession = factory.openSession();
 			int check = sqlSession.selectOne("MEMBER.checkMember",mail);
-			System.out.println(check);
 			sqlSession.close();
 			if(check==0) return true;
 		} catch (Exception e) {

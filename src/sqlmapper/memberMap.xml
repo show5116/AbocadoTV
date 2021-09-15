@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insertMember" parameterType="MemberVO">
 		INSERT INTO `MEMBER` 
-		(MEMBER_MAIL,FIRSTNAME,LASTNAME,PASSWORD)
-		VALUES (#{member_mail},#{firstname},#{lastname},#{password})
+		(MEMBER_MAIL,FIRSTNAME,LASTNAME,NICKNAME,MEMBER_DATE,PASSWORD,REGEDENT_NUM)
+		VALUES (#{member_mail},#{firstname},#{lastname},#{nickname},SYSDATE(),#{password},#{regedent_num})
 	</insert>
 </mapper>

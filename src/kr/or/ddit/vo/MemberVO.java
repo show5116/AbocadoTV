@@ -8,7 +8,7 @@ public class MemberVO {
 	private String password;
 	private String nickname;
 	private String member_date;
-	private String regedent_number;
+	private String regedent_num;
 	private String introducion;
 	private String freezdate;
 	private String profilephoth;
@@ -50,11 +50,11 @@ public class MemberVO {
 	public void setMember_date(String member_date) {
 		this.member_date = member_date;
 	}
-	public String getRegedent_number() {
-		return regedent_number;
+	public String getRegedent_num() {
+		return regedent_num;
 	}
-	public void setRegedent_number(String regedent_number) {
-		this.regedent_number = regedent_number;
+	public void setRegedent_num(String regedent_num) {
+		this.regedent_num = regedent_num;
 	}
 	public String getIntroducion() {
 		return introducion;
